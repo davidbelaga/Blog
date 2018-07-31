@@ -1,0 +1,31 @@
+<h1><%= @article.title %></h1>
+
+<p>title : " <%= @article.title %> "</p>
+
+<%= form_tag "/articles/#{@article.id}", method: "patch" do %>
+  <input type="text" name="title" value="<%= @article.title %>" />
+  <input type="submit" value="Modifier le titre" />
+  <p>content : " <%= @article.content %> "</p>
+
+  <% @comments.each do |comment| %>
+<p>"<%= comment.content %>" commenté par <%= comment.author %></p>
+	<% end %>
+
+  <p><textarea type="text" name="content" rows=12 cols=120><%= @article.content %></textarea></p>
+
+  <input type="submit" value="Modifier le contenu" />
+
+<% end %>
+
+
+<%= form_tag "/articles/#{@article.id}", method: "delete" do %>
+  <input type="submit" value="Supprimer l'article" />
+<% end %>
+
+<%= form_tag "/articles/#{@article.id}", method: 'post' do %>
+ <p>commentaire<textarea type="text" name="content" rows=5 cols=120></textarea></p>
+ <p>signature<input type="text" name="author" />
+ <input type="submit" value="Ajoutez un commentaire" />
+<% end %>
+
+<p><a href="/articles">Retourner à l’index</a></p>

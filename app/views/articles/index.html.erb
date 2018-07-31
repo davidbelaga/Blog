@@ -1,0 +1,25 @@
+<h1>Liste des articles</h1>
+<% @articles.each do |article| %>
+  <p>
+    <a href="/articles/<%= article.id %>">
+      <% if article.category %>
+        <%= article.title %> (<%= article.category.name %>)
+      <% else %>
+        <%= article.title %>
+      <% end %>
+    </a>
+  </p>
+<% end %>
+
+<h2>Rentrez le titre d'un article dans la base de données</h2>
+
+<%= form_tag '/articles', method: 'post' do %>
+  <input type="text" name="title" />
+  <select name="category_id">
+    <% @categories.each do |category| %>
+      <option value="<%= category.id %>"><%= category.name %></option>
+    <% end %>
+  </select>
+  <input type="submit" value="Ajouter l'article" />
+<% end %>
+
